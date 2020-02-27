@@ -1,0 +1,22 @@
+job('job-DSL'){
+  description('Es nuestro primer JOB creado a partir de un seed')
+  parameters {
+    stringParam('Planet', defaultValue= 'world', description= 'This is the world')
+    booleanParam('FLAG', true)
+    choiceParam('OPTION' , ['option 1 (default)', 'option 2', 'option 3'])
+  }
+  scm{
+    git('https://github.com/jenkins-docs/simple-java-maven-app','master')
+  }
+  triggers{
+    cron('H 5 * * 7')
+  }
+  steps{
+  shell("echo 'Hello world'")
+  shell("echo 'Hello world 2'")
+  }
+  publishers{
+  mailer('coughy_2@hotmail.com',true,true)
+  }
+}
+
